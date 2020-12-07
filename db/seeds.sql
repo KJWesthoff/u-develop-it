@@ -17,7 +17,7 @@ VALUES
   ('Octavia', 'Butler', 3, 1),
   ('Unica', 'Zurn', NULL, 1);
 
-  INSERT INTO voters (first_name, last_name, email)
+INSERT INTO voters (first_name, last_name, email)
 VALUES
   ('James', 'Fraser', 'jf@goldenbough.edu'),
   ('Jack', 'London', 'jlondon@ualaska.edu'),
@@ -69,3 +69,7 @@ VALUES
   ('Hubert', 'Crackanthorpe', 'hcrackan@goodletters.com'),
   ('William', 'Carleton', 'wcarleton@literature.com'),
   ('Gerald', 'Griffin', 'ggriff@lit.net');
+
+
+INSERT INTO votes (voter_id, candidate_id) 
+VALUES(3,1), (4,2), (5,2), (6,2), (7,2), (8,3), (9,3);

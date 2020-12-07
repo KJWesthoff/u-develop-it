@@ -5,7 +5,7 @@ const inputCheck = require('../../utils/inputCheck');
 
 
 router.post('/vote',({body},res)=> {
-    console.log("vot running")
+    
     const errors = inputCheck(body, 'voter_id' , 'candidate_id');
     if(errors){
         res.status(400).json({error:errors});
@@ -28,6 +28,28 @@ router.post('/vote',({body},res)=> {
         });
     });
 });
+
+router.get('/votes', (req,res)=>{
+    const sql = `SELECT candidates.*, parties.name AS party_name, COUNT(candidate_id) AS count
+                FROM votes
+                LEFT JOIN candidates ON votes.candidate_id = candidates.id
+                LEFT JOIN parties ON candidates.party_id = parties.id
+                GROUP BY candidate_id ORDER BY count DESC;`
+    const params = [];
+
+    db.all(sql, params, (err, rows) => {
+        if(err){
+            res.status(500).json({error: err.message});
+            return;
+        }
+        
+        res.json({
+            message:"success",
+            data: rows
+        });
+    });
+});
+
 
 
 
